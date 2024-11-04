@@ -6,7 +6,7 @@ let website = {
 };
 
 let useState = {
-    container: false,
+    div: 0,
     css: false,
     js: false,
 }
@@ -40,13 +40,13 @@ function ProcessLine(line) {
         'img:': (value) => { generatedLines.push(`<img src="${value}"/>`); },
         'a:': (value) => { generatedLines.push(`<a href="https://${value}">${value}</a>`); },
         '//': (value) => { generatedLines.push(`<!-- ${value} -->`); },
-        'CONTAINER': () => { generatedLines.push('<div class="container">'); useState.container = true; },
+        'CONTAINER': () => { generatedLines.push('<div class="container">'); useState.div += 1; },
         'STYLE': () => { generatedLines.push('<style>'); useState.css = true; },
         'SCRIPT': () => { generatedLines.push('<script>'); useState.js = true; },
         'END': () => { 
-            if (useState.container) {
+            if (useState.div > 0) {
                 generatedLines.push('</div>');
-                useState.container = false;
+                useState.div -= 1;
             } else if (useState.css) {
                 generatedLines.push('</style>');
                 useState.css = false;
