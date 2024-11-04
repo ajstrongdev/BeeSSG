@@ -22,8 +22,8 @@ h1, h2, h3 {
 }
 
 h1, h2, h3, p {
-    margin-top: .5em;
-    margin-bottom: .5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 .hero {
@@ -36,7 +36,6 @@ h1, h2, h3, p {
 }
 
 .hero h1, .hero h2, .hero h3, .hero p {
-    padding: .5em;
     color: var(--background);
     display: block;
 }
