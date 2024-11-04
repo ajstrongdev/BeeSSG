@@ -46,9 +46,14 @@ jobs:
         with:
           name: generated-html
 
+      - name: Prepare publish directory
+        run: |
+          mkdir -p publish
+          mv output/* publish/ || true
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
+          publish_dir: ./publish
           publish_branch: gh-pages
