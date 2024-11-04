@@ -40,6 +40,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          ref: gh-pages
 
       - name: Download generated HTML and CSS
         uses: actions/download-artifact@v3
@@ -50,6 +52,8 @@ jobs:
         run: |
           mkdir -p publish
           mv output/* publish/ || true
+          echo "Files moved to publish directory:"
+          ls -la publish
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
