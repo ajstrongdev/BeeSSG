@@ -1,4 +1,4 @@
-name: Build HTML from beepage and Deploy to GitHub Pages
+name: Build and Deploy to GitHub Pages
 
 on:
   push:
@@ -24,13 +24,14 @@ jobs:
       - name: Run Site generation script
         run: node index.js generate
 
+      - name: List generated files
+        run: ls -la output
+
       - name: Upload generated HTML and CSS
         uses: actions/upload-artifact@v3
         with:
           name: generated-html
-          path: |
-            output/index.html
-            output/styles.css
+          path: output/*
 
   deploy:
     runs-on: ubuntu-latest
@@ -49,5 +50,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./output
+          publish_dir: .
           publish_branch: gh-pages
