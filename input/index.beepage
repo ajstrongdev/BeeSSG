@@ -1,0 +1,10 @@
+PRELUDE
+title: BeeSSG
+theme: default
+
+CONTAINER
+    h1: BeeSSG
+    p: Website coming soon.
+END
+
+POSTLUDE
