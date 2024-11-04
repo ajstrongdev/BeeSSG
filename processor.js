@@ -29,8 +29,8 @@ const postlude = [
 
 function ProcessLine(line) {
     const commands = {
-        'title:': (value) => { website.title = value; },
-        'theme:': (value) => { website.theme = value; },
+        'title:': (value) => { website.title == value; },
+        'theme:': (value) => { website.theme == value; },
         'PRELUDE': () => { generatedLines.push(...prelude); },
         'POSTLUDE': () => { generatedLines.push(...postlude); },
         'h1:': (value) => { generatedLines.push(`<h1>${value}</h1>`); },
@@ -41,6 +41,7 @@ function ProcessLine(line) {
         'a:': (value) => { generatedLines.push(`<a href="https://${value}">${value}</a>`); },
         '//': (value) => { generatedLines.push(`<!-- ${value} -->`); },
         'CONTAINER': () => { generatedLines.push('<div class="container">'); useState.div += 1; },
+        'HERO': () => { generatedLines.push('<div class="hero">'); useState.div += 1; },
         'STYLE': () => { generatedLines.push('<style>'); useState.css = true; },
         'SCRIPT': () => { generatedLines.push('<script>'); useState.js = true; },
         'END': () => { 
