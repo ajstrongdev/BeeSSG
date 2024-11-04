@@ -1,0 +1,26 @@
+name: Deploy to GitHub Pages
+
+on:
+  workflow_run:
+    workflows: ["Build HTML from beepage"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Download generated HTML and CSS
+        uses: actions/download-artifact@v3
+        with:
+          name: generated-html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output
